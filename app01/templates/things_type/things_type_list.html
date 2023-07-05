@@ -1,0 +1,59 @@
+{% extends 'layout.html' %}
+{% block tlmp %}
+    <div class="container">
+        <div style="margin-bottom: 10px" class="clearfix">
+            <a class="btn  btn-success " href="/things/add/">
+                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                创建类别
+            </a>
+
+            <div class="clearfix" style="float: right;width: 300px">
+                <form method="get">
+                    <div class="input-group">
+
+                        <input type="text" name="q" class="form-control" placeholder="Search for..."
+                               value={{ search_data }}>
+                        <span class="input-group-btn">
+                        <button class="btn btn-default" type="submit">
+                        <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                        </button>
+                            </span>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+                    分类信息
+                </div>
+                <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                        <th>事件分类I</th>
+                        <th>事件分类II</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for obj in things_type_list %}
+                        <tr>
+                            <td>{{ obj.get_things_type1_display }}</td>
+                            <td>{{ obj.things_type2 }}</td>
+                            <td>
+                                <a class="btn btn-primary btn-xs" href="/things/{{ obj.id }}/edit/">
+                                    编辑
+                                </a>
+                                <a class="btn btn-danger btn-xs" href="/things/delete/?nid={{ obj.id }}">
+                                    删除
+                                </a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}

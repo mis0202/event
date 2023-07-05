@@ -1,0 +1,27 @@
+{% extends 'layout.html' %}#}
+
+{% block tlmp %}
+    <div class="container">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 style="color: #3e8f3e ">编辑类别
+
+                </h4>
+            </div>
+            <div class="panel-body">
+                <form method="post" novalidate>
+                    {% csrf_token %}
+                    {% for field in form %}
+                        <div class="form-group">
+                            <label>
+                                {{ field.label }}
+                            </label>
+                            {{ field }}<span style="color: red">{{ field.errors.0 }}</span>
+                        </div>
+                    {% endfor %}
+                    <button type="submit" class="btn-primary"> 提 交</button>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,113 @@
+<!--
+{#{% extends 'layout.html' %}#}
+{#{% block  tlmp %}#}
+{#    <div class="container">#}
+{#        <div style="margin-bottom: 10px">#}
+{#            <a class="btn  btn-success " href="#">#}
+{#                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>#}
+{#                新增用户#}
+{#            </a>#}
+{#        </div>#}
+{#        <div class="bs-example" data-example-id="table-within-panel">#}
+{#            <div class="panel panel-default">#}
+{#                <div class="panel-heading">#}
+{#                    <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>#}
+{#                    用户信息#}
+{#                </div>#}
+{#                <table class="table">#}
+{#                    <thead>#}
+{##}
+{#                    <tr>#}
+{#                        <th>ID</th>#}
+{#                        <th>姓名</th>#}
+{#                        <th>年龄</th>#}
+{#                        <th>性别</th>#}
+{#                        <th>入职时间</th>#}
+{#                        <th>账户余额</th>#}
+{#                        <th>所属部门</th>#}
+{#                    </tr>#}
+{##}
+{#                    </thead>#}
+{#                    <tbody>#}
+{#                    {% for obj in user_list %}#}
+{#                        <tr>#}
+{#                            <th>{{ obj.id }}</th>#}
+{#                            <th>{{ obj.name }}</th>#}
+{#                            <th>{{ obj.age }}</th>#}
+{#                            <th>{{ obj.get_gender_display }}</th>#}
+{#                            <th>{{ obj.create_time |date:"Y-m-d" }}</th>#}
+{#                            <th>{{ obj.account }}</th>#}
+{#                            <th>{{ obj.depart.title }}</th>#}
+{#                            <th>操作</th>#}
+{#                            <td>#}
+{#                                <a class="btn btn-primary btn-xs" href="/user/edit">#}
+{#                                    编辑#}
+{#                                </a>#}
+{#                                <a class="btn btn-danger btn-xs" href="/user/delete">#}
+{#                                    删除#}
+{#                                </a>#}
+{#                            </td>#}
+{#                        </tr>#}
+{#                    {% endfor %}#}
+{#                    </tbody>#}
+{#                </table>#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
+{##}
+{#{% endblock %}#}
+
+-->
+{% extends 'layout.html' %}#}
+{% load static %}
+
+{% block css %}
+    <link rel="stylesheet"
+          href="{% static 'plugins/bootstrap-datetimepicker-master/css/bootstrap-datetimepicker.min.css' %}">
+{% endblock %}
+{% block tlmp %}
+    <div class="container">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4>新建用户</h4>
+            </div>
+            <div class="panel-body">
+                <form method="post" novalidate>
+                    {% csrf_token %}
+                    {% for field in form %}
+                        <div class="form-group">
+                            <label>
+                                {{ field.label }}
+                            </label>
+                            {{ field }}<span style="color: red">{{ field.errors.0 }}</span>
+                        </div>
+                    {% endfor %}
+                    <button type="submit" class="btn-primary"> 提 交</button>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+
+{% block js %}
+    <script src="{% static 'plugins/bootstrap-datetimepicker-master/js/bootstrap-datetimepicker.js' %} "></script>
+    <script src="{% static 'plugins/bootstrap-datetimepicker-master/js/locales/bootstrap-datetimepicker.zh-CN.js' %}"></script>
+    <script>
+        $(function () {
+            $('#id_create_time').datetimepicker({
+                format: 'yyyy-mm-dd',
+                startDate: '0',
+                language: 'zh-CN',
+                autoclose: true,
+                minView: 'hour',
+                todayHighlight: 1,
+                todayBtn: true,
+                forceParse: true,
+                clearBtn: true,
+                pickerPosition: 'bottom-left',
+            })
+
+        });
+    </script>
+{% endblock %}

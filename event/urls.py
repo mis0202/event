@@ -44,10 +44,10 @@ urlpatterns = [
     # path('phone/delete/', views.phone_delete),
 
     # 设备类型
-    path('things/list/', views.things_type_list),
-    path('things/add/', views.things_type_add),
-    path('things/<int:nid>/edit/', views.things_type_edit),
-    path('things/delete/', views.things_type_delete),
+    # path('things/list/', views.things_type_list),
+    # path('things/add/', views.things_type_add),
+    # path('things/<int:nid>/edit/', views.things_type_edit),
+    # path('things/delete/', views.things_type_delete),
 
     # 事件记录表
     path('event/list/', views.event_list),

@@ -216,92 +216,92 @@ def phone_delete(request):
 
 
 ######################### things_operator##########################
-def things_type_list(request):
-    things_type_list = models.things_type.objects.all()
+# def things_type_list(request):
+#     things_type_list = models.things_type.objects.all()
+#
+#     return render(request, "things_type/things_type_list.html", {"things_type_list": things_type_list})
+#
 
-    return render(request, "things_type/things_type_list.html", {"things_type_list": things_type_list})
-
-
-class thingsAdd(forms.ModelForm):
-    """ 添加类别类 """
-
-    class Meta:
-        model = models.things_type
-        fields = "__all__"
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        # 循环添加样式
-        for name, field in self.fields.items():
-            field.widget.attrs = {"class": "form-control", "placeholder": field.label}
-
-    def clean_event(self):
-
-        txt_things_type2 = self.cleaned_data["things_type2"]
-        exists = models.event_list.objects.filter(things_type2=txt_things_type2).exists()
-        if exists:
-            raise ValidationError("类别已存在")
-        return txt_things_type2
-
-
-def things_type_add(request):
-    """ 添加类别 """
-    if request.method == "GET":
-        form = thingsAdd()
-        return render(request, "things_type/things_type_add.html", {"form": form})
-    form = thingsAdd(data=request.POST)
-    if form.is_valid():
-        form.save()
-        return redirect("/things/list/")
-    return redirect(request, "things_type/things_type_add.html", {"form": form})
-
-
-class thingsEdit(forms.ModelForm):
-    """ 类编辑 """
-
-    class Meta:
-        model = models.things_type
-        fields = "__all__"
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        for name, field in self.fields.items():
-            field.widget.attrs = {"class": "form-control", "placeholder": field.label}
-
-    def clean_things_type(self):
-
-        txt_things_type = self.cleaned_data["things_type"]
-        exists = models.things_type.objects.exclude(id=self.instance.id).filter(things_type=txt_things_type).exists()
-        if exists:
-            raise ValidationError("类别已存在")
-        return txt_things_type
-
-
-def things_type_edit(request, nid):
-    """ 编辑类别 """
-    row_object = models.things_type.objects.filter(id=nid).first()
-    if request.method == "GET":
-        form = thingsEdit(instance=row_object)
-        return render(request, "things_type/things_type_edit.html", {"form": form})
-
-    form = thingsEdit(data=request.POST, instance=row_object)
-
-    if form.is_valid():
-        form.save()
-        return redirect("/things/list/")
-    return render(request, "things_type/things_type_edit.html", {"form": form})
-
-
-def things_type_delete(request):
-    """删除类别"""
-    # 获取ID
-    nid = request.GET.get("nid")
-
-    # 删除
-    models.things_type.objects.filter(id=nid).delete()
-
-    # 重定向到列表
-    return redirect("/things/list/")
+# class thingsAdd(forms.ModelForm):
+#     """ 添加类别类 """
+#
+#     class Meta:
+#         model = models.things_type
+#         fields = "__all__"
+#
+#     def __init__(self, *args, **kwargs):
+#         super().__init__(*args, **kwargs)
+#         # 循环添加样式
+#         for name, field in self.fields.items():
+#             field.widget.attrs = {"class": "form-control", "placeholder": field.label}
+#
+#     def clean_event(self):
+#
+#         txt_things_type2 = self.cleaned_data["things_type2"]
+#         exists = models.event_list.objects.filter(things_type2=txt_things_type2).exists()
+#         if exists:
+#             raise ValidationError("类别已存在")
+#         return txt_things_type2
+#
+#
+# def things_type_add(request):
+#     """ 添加类别 """
+#     if request.method == "GET":
+#         form = thingsAdd()
+#         return render(request, "things_type/things_type_add.html", {"form": form})
+#     form = thingsAdd(data=request.POST)
+#     if form.is_valid():
+#         form.save()
+#         return redirect("/things/list/")
+#     return redirect(request, "things_type/things_type_add.html", {"form": form})
+#
+#
+# class thingsEdit(forms.ModelForm):
+#     """ 类编辑 """
+#
+#     class Meta:
+#         model = models.things_type
+#         fields = "__all__"
+#
+#     def __init__(self, *args, **kwargs):
+#         super().__init__(*args, **kwargs)
+#         for name, field in self.fields.items():
+#             field.widget.attrs = {"class": "form-control", "placeholder": field.label}
+#
+#     def clean_things_type(self):
+#
+#         txt_things_type = self.cleaned_data["things_type"]
+#         exists = models.things_type.objects.exclude(id=self.instance.id).filter(things_type=txt_things_type).exists()
+#         if exists:
+#             raise ValidationError("类别已存在")
+#         return txt_things_type
+#
+#
+# def things_type_edit(request, nid):
+#     """ 编辑类别 """
+#     row_object = models.things_type.objects.filter(id=nid).first()
+#     if request.method == "GET":
+#         form = thingsEdit(instance=row_object)
+#         return render(request, "things_type/things_type_edit.html", {"form": form})
+#
+#     form = thingsEdit(data=request.POST, instance=row_object)
+#
+#     if form.is_valid():
+#         form.save()
+#         return redirect("/things/list/")
+#     return render(request, "things_type/things_type_edit.html", {"form": form})
+#
+#
+# def things_type_delete(request):
+#     """删除类别"""
+#     # 获取ID
+#     nid = request.GET.get("nid")
+#
+#     # 删除
+#     models.things_type.objects.filter(id=nid).delete()
+#
+#     # 重定向到列表
+#     return redirect("/things/list/")
 
 
 ############################### 工单内容 ###############################

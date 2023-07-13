@@ -137,16 +137,16 @@ class dev_type(models.Model):
         return self.dev_type
 
 
-class things_type(models.Model):
-    things_type1_choise = (
-        (0, "新增需求"),
-        (1, "服务请求"),
-        (2, "故障处理"),
-        (3, "技术支持"),
-        (4, "方案变更"),
-    )
-    things_type1 = models.SmallIntegerField(verbose_name='事件分类I', choices=things_type1_choise)
-    things_type2 = models.CharField(verbose_name="事件分类I", max_length=32)
+# class things_type(models.Model):
+#     things_type1_choise = (
+#         (0, "新增需求"),
+#         (1, "服务请求"),
+#         (2, "故障处理"),
+#         (3, "技术支持"),
+#         (4, "方案变更"),
+#     )
+#     things_type1 = models.SmallIntegerField(verbose_name='事件分类I', choices=things_type1_choise)
+#     things_type2 = models.CharField(verbose_name="事件分类I", max_length=32)
 
 
 class event_list(models.Model):
@@ -162,6 +162,7 @@ class event_list(models.Model):
     things_source = models.CharField(verbose_name="请求来源", max_length=64)
     source_user = models.CharField(verbose_name="报障人员", max_length=64)
     dev_type = models.CharField(verbose_name="设备类型", max_length=64)
+
     things_type1_choise = (
         (0, "新增需求"),
         (1, "服务请求"),
@@ -170,7 +171,16 @@ class event_list(models.Model):
         (4, "方案变更"),
     )
     things_type1 = models.SmallIntegerField(verbose_name="事件分类I", choices=things_type1_choise)
-    things_type2 = models.CharField(verbose_name="事件分类II", max_length=64)
+
+    things_type2_choise = (
+        (0, "新增需求2"),
+        (1, "服务请求2"),
+        (2, "故障处理2"),
+        (3, "技术支持2"),
+        (4, "方案变更2"),
+    )
+    things_type2 = models.SmallIntegerField(verbose_name="事件分类II", choices=things_type2_choise)
+
     level_choise = (
         (0, "不涉及"),
         (1, "一级故障"),

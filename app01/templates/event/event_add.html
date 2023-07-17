@@ -13,6 +13,19 @@
                 <form method="post" novalidate>
                     {% csrf_token %}
                     {% for obj in form %}
+{#              {% if obj.name == 'date_field' %}#}
+{#                    <div class="form-group">#}
+{#                        {{ field.errors }}#}
+{#                        <label for="{{ field.id_for_label }}" class="control-label">{{ field.label }}</label>#}
+{#                        <input id="{{ field.auto_id }}" class="form-control" type="text" name="{{ field.html_name }}"#}
+{#                            value="{{ field.value|default_if_none:'' }}" placeholder="{{ field.label }}"#}
+{#                            required>#}
+{#                    </div>#}
+{#                {% elif  %}#}
+{#                    {{ field.errors }}#}
+{#                    {{ field.label_tag }} {{ field }}#}
+{#                {% endif %}#}
+
                         <div>
                             <label>{{ obj.label }}</label>{{ obj }}
                             <span style="color: red;"> {{ obj.errors.0 }}</span>
